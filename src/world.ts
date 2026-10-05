@@ -105,9 +105,17 @@ const trimTo = (text: string, limit: number): string =>
 export const scenePrompt = (scene: string, suffix: string): string =>
     trimTo(`${scene.trim()}, ${suffix}`, MAX_PROMPT_CHARS);
 
+/**
+ * What every step after the first has to say. The reference image carries the
+ * look; without this the model repaints the same framing from the reference
+ * and the walk never moves.
+ */
+const BEYOND_DIRECTIVE =
+    "The player has stepped through, so paint a new camera position and angle, not the reference framing. Keep the same place and medium.";
+
 /** The prompt that paints the view behind a clicked way forward. */
 export const spotPrompt = (spot: Spot, suffix: string): string =>
-    trimTo(`${spot.prompt.trim()}, ${suffix}`, MAX_PROMPT_CHARS);
+    trimTo(`${BEYOND_DIRECTIVE} ${spot.prompt.trim()}, ${suffix}`, MAX_PROMPT_CHARS);
 
 const toBase64Url = (text: string): string => {
     const bytes = new TextEncoder().encode(text);

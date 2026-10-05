@@ -25,10 +25,12 @@ export const REDIRECT_URI: string =
 export const VISION_MODEL = "openai/gpt-5.4-nano";
 
 /**
- * Paints the next postcard. Free, takes exactly one reference image, and
- * answers in around half a minute — fast enough that a walk stays a walk.
+ * Paints the next postcard. Takes the previous view as a reference and
+ * repaints the same place from a new camera position; the cheaper
+ * text-to-image models copy the reference framing instead, and the walk
+ * stalls on one picture.
  */
-export const IMAGE_MODEL = "microsoft/mai-image-2.6-flash";
+export const IMAGE_MODEL = "black-forest-labs/flux.1-kontext-pro";
 
 /** Postcard proportion. Square reads best as a card in the trail strip. */
 export const IMAGE_SIZE = "1024x1024";

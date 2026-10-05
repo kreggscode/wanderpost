@@ -123,9 +123,11 @@ describe("prompts", () => {
         );
     });
 
-    it("paints later views from the way through", () => {
+    it("paints later views from the way through, from a new angle", () => {
         const spot = { label: "a door", x: 0.5, y: 0.5, prompt: "a lantern-lit corridor" };
-        expect(spotPrompt(spot, "ink and wash")).toBe("a lantern-lit corridor, ink and wash");
+        const prompt = spotPrompt(spot, "ink and wash");
+        expect(prompt).toContain("new camera position and angle");
+        expect(prompt).toContain("a lantern-lit corridor, ink and wash");
     });
 
     it("keeps a long scene from running away with the prompt", () => {

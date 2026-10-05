@@ -31,22 +31,26 @@ Style consistency comes from passing the previous view as a reference image:
 ```
 POST /v1/images/generations
 {
-  "prompt":  "a lantern-lit wooden footbridge over a stream, watercolour postcard",
-  "model":   "microsoft/mai-image-2.6-flash",
+  "prompt":  "The player has stepped through, so paint a new camera position and angle, not the reference framing. Keep the same place and medium. a lantern-lit wooden footbridge over a stream, watercolour postcard",
+  "model":   "black-forest-labs/flux.1-kontext-pro",
   "image":   ["https://media.pollinations.ai/<the previous view>"]
 }
 ```
 
-The model copies what it is shown — the deckled paper edge, the watercolour
-washes, the palette — so a walk stays one world instead of five unrelated
-pictures. The reference is a public Pollinations URL, which is what the
+The reference carries the look — the deckled paper edge, the watercolour
+washes, the palette — and the prompt has to carry the move. A prompt that only
+named the next view let `microsoft/mai-image-2.6-flash` repaint the reference
+to within 3–5% of its pixels, so the walk never went anywhere. Naming the new
+camera position and switching to `flux.1-kontext-pro` steps 10–22% of the
+pixels per view while three vision judges still read the pair as one place in
+one medium. The reference is a public Pollinations URL, which is what the
 previous call just returned.
 
 ## What it calls
 
 | Step | Endpoint | Model |
 | --- | --- | --- |
-| Paint a view | `POST /v1/images/generations` | `microsoft/mai-image-2.6-flash` |
+| Paint a view | `POST /v1/images/generations` | `black-forest-labs/flux.1-kontext-pro` |
 | Find the ways forward | `POST /v1/chat/completions` | `openai/gpt-5.4-nano` |
 
 ## Bring your own Pollen
